@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>個人で商品券が使える｜セーフティージャパン</title>
+<title>霧島市民限定｜商品券で安全装備を｜セーフティージャパン</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -113,129 +113,173 @@ header {
 }
 
 /* ===== HERO ===== */
+.hero-urgency {
+  background: var(--red);
+  text-align: center;
+  padding: 9px 20px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #fff;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.82; }
+}
+
 .hero {
   background: var(--bg);
-  padding: 40px 20px 48px;
+  padding: 32px 20px 44px;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid #222;
 }
-.hero::after {
-  content: '個人';
+.hero::before {
+  content: '';
   position: absolute;
-  bottom: -20px; right: -10px;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold) 0%, #fff3a0 50%, var(--gold) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.hero::after {
+  content: '9,000';
+  position: absolute;
+  bottom: -28px; right: -12px;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 9rem;
+  font-size: 10rem;
   color: rgba(232,168,0,0.04);
   line-height: 1;
   pointer-events: none;
-  letter-spacing: -0.02em;
 }
 
-.hero-badge {
+/* 市民バッジ */
+.citizen-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: var(--red);
-  color: #fff;
-  font-size: 0.7rem;
+  gap: 7px;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+  font-size: 0.68rem;
   font-weight: 900;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   padding: 5px 12px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   animation: fadeUp 0.5s ease both;
+}
+.citizen-badge span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  animation: blink 1.4s ease-in-out infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.2; }
 }
 
 .hero-title {
-  font-size: 2.4rem;
+  font-size: 2.5rem;
   font-weight: 900;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin-bottom: 20px;
-  animation: fadeUp 0.5s 0.1s ease both;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  animation: fadeUp 0.5s 0.08s ease both;
 }
 .hero-title em {
   font-style: normal;
   color: var(--gold);
+  display: block;
+}
+
+/* 差額ハイライト */
+.hero-saving {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 20px 0 16px;
+  animation: fadeUp 0.5s 0.13s ease both;
+}
+.saving-lost {
+  background: #2A2020;
+  border: 1px solid #4A2A2A;
+  padding: 14px 16px;
+  flex: 1;
+  text-align: center;
+}
+.saving-lost .sl-label { font-size: 0.6rem; color: #888; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 3px; }
+.saving-lost .sl-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  color: #666;
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  letter-spacing: 0.03em;
+}
+.saving-arrow {
+  background: var(--red);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 0 10px;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  writing-mode: horizontal-tb;
+}
+.saving-gain {
+  background: #1A1800;
+  border: 2px solid var(--gold);
+  padding: 14px 16px;
+  flex: 1;
+  text-align: center;
+}
+.saving-gain .sg-label { font-size: 0.6rem; color: var(--gold); font-weight: 900; letter-spacing: 0.1em; margin-bottom: 3px; }
+.saving-gain .sg-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  color: var(--gold);
+  letter-spacing: 0.03em;
+}
+
+.hero-saving-note {
+  background: var(--gold);
+  color: #000;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  padding: 8px 20px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.5s 0.16s ease both;
 }
 
 .hero-body {
-  font-size: 0.88rem;
-  color: rgba(244,240,232,0.65);
+  font-size: 0.86rem;
+  color: rgba(244,240,232,0.6);
   line-height: 1.85;
-  margin-bottom: 32px;
-  animation: fadeUp 0.5s 0.15s ease both;
+  margin-bottom: 28px;
+  animation: fadeUp 0.5s 0.18s ease both;
+  border-left: 3px solid var(--gold);
+  padding-left: 14px;
 }
-.hero-body strong { color: var(--gold); }
-
-/* PRICE CARD */
-.price-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--gold);
-  padding: 24px 20px;
-  margin-bottom: 32px;
-  animation: fadeUp 0.5s 0.2s ease both;
-  position: relative;
-}
-.price-card::before {
-  content: '霧島市プレミアム商品券';
-  position: absolute;
-  top: -10px; left: 16px;
-  background: var(--gold);
-  color: #000;
-  font-size: 0.62rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  padding: 3px 10px;
-}
-
-.price-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-.price-item .plabel {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--gray);
-  margin-bottom: 2px;
-}
-.price-item .pvalue {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.8rem;
-  line-height: 1;
-  letter-spacing: 0.03em;
-  color: var(--white);
-}
-.price-item.gold .pvalue { color: var(--gold); }
-.price-item .pvalue sup { font-size: 1.2rem; }
-.price-arrow { font-size: 1.6rem; color: var(--gold); opacity: 0.7; flex-shrink: 0; }
-.price-premium {
-  display: inline-block;
-  background: var(--red);
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  padding: 4px 12px;
-  margin-bottom: 14px;
-}
-.price-note {
-  font-size: 0.8rem;
-  color: var(--gray);
-  line-height: 1.75;
-}
-.price-note strong { color: var(--gold); }
+.hero-body strong { color: var(--white); }
 
 /* HERO CTA */
 .hero-cta {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
-  animation: fadeUp 0.5s 0.25s ease both;
+  animation: fadeUp 0.5s 0.22s ease both;
   margin-bottom: 60px;
 }
 .btn-primary {
@@ -623,42 +667,42 @@ footer {
   <a href="tel:0995-57-7171" class="header-tel-link">📞 電話する</a>
 </header>
 
+<!-- URGENCY BAR -->
+<div class="hero-urgency">⏰ 商品券の購入期限：6月12日（金）まで　／　利用期限：10月18日まで</div>
+
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">🏙️ 霧島市プレミアム商品券 対応店舗</div>
-
-  <h1 class="hero-title">
-    個人でも<br>
-    商品券が<br>
-    <em>使えます。</em>
-  </h1>
-
-  <p class="hero-body">
-    自分の安全靴・工具は自分で選びたい方へ。<br>
-    会社経由は不要。<strong>個人で注文→現場に直接お届け。</strong>
-  </p>
-
-  <div class="price-card">
-    <div class="price-row">
-      <div class="price-item">
-        <div class="plabel">購入価格</div>
-        <div class="pvalue"><sup>¥</sup>5,000</div>
-      </div>
-      <div class="price-arrow">→</div>
-      <div class="price-item gold">
-        <div class="plabel">使える金額</div>
-        <div class="pvalue"><sup>¥</sup>14,000</div>
-      </div>
-    </div>
-    <div class="price-premium">🔥 プレミアム率 180%</div>
-    <div class="price-note">
-      安全靴・作業工具・保護具が<strong>お得に購入できます。</strong><br>
-      霧島市内の現場へ直接お届け・領収書も発行します。
-    </div>
+  <div class="citizen-badge">
+    <span></span>
+    霧島市民限定の商品券です
   </div>
 
+  <h1 class="hero-title">
+    5,000円払って<br>
+    <em>9,000円トク。</em>
+  </h1>
+
+  <div class="hero-saving">
+    <div class="saving-lost">
+      <div class="sl-label">定価で買うと</div>
+      <div class="sl-val">¥14,000</div>
+    </div>
+    <div class="saving-arrow">▶</div>
+    <div class="saving-gain">
+      <div class="sg-label">あなたの負担</div>
+      <div class="sg-val">¥5,000</div>
+    </div>
+  </div>
+  <div class="hero-saving-note">差額 9,000円分がまるまるトク！</div>
+
+  <p class="hero-body">
+    安全靴・工具・保護具を<strong>個人で注文できます。</strong><br>
+    霧島市内の工事現場なら直接お届け。<br>
+    店舗に行く手間ゼロ。領収書も発行します。
+  </p>
+
   <div class="hero-cta">
-    <a href="tel:0995-57-7171" class="btn-primary">📞 今すぐ電話する</a>
+    <a href="tel:0995-57-7171" class="btn-primary">📞 今すぐ電話する（平日 9:00〜17:00）</a>
     <a href="mailto:safetyjapan.mk@gmail.com" class="btn-secondary">✉️ メールで問い合わせ</a>
   </div>
 </section>
@@ -677,16 +721,16 @@ footer {
   <h2 class="sec-title">個人のお客さまへ</h2>
 
   <div class="individual-banner">
-    <div class="ind-title">商品券は個人でのみ<br>ご利用いただけます</div>
+    <div class="ind-title">この商品券は<br>霧島市民・個人専用です</div>
     <div class="ind-body">
-      霧島市のプレミアム商品券は<strong>個人のお客さまを対象</strong>とした制度です。自分に合ったサイズ・スペックを相談しながら選んでいただけます。
+      霧島市のプレミアム商品券は<strong>霧島市民の個人を対象</strong>とした制度です。会社経由は不要。自分に合ったサイズ・スペックを相談しながら選べます。
     </div>
   </div>
 
   <ul class="checklist">
     <li>サイズや用途を相談しながら選べる</li>
     <li>1点からでも注文OK</li>
-    <li>現場・自宅に直接配達</li>
+    <li>霧島市内の工事現場に直接配達</li>
     <li>領収書を個人名義で発行</li>
     <li>配達日時はご相談に応じます</li>
   </ul>
@@ -750,7 +794,7 @@ footer {
       <div class="step-content">
         <div class="step-tag">利用期間：5/18〜10/18</div>
         <h3>セーフティージャパンに連絡</h3>
-        <p>欲しい商品と配達場所をお知らせください。現場へ直接お届け・領収書も発行します。</p>
+        <p>欲しい商品と工事現場の場所をお知らせください。現場へ直接お届け・領収書も発行します。</p>
       </div>
     </div>
   </div>
@@ -770,8 +814,8 @@ footer {
     <div class="merit-item">
       <div class="merit-num">02</div>
       <div class="merit-icon">🚚</div>
-      <h3>霧島市内の現場へ直接配達</h3>
-      <p>わざわざ店舗に出向く必要なし。ご指定の現場や作業所・自宅へ直接お届けします。</p>
+      <h3>霧島市内の工事現場へ直接配達</h3>
+      <p>わざわざ店舗に出向く必要なし。霧島市内の工事現場へ直接お届けします。</p>
     </div>
     <div class="merit-item">
       <div class="merit-num">03</div>
@@ -808,7 +852,7 @@ footer {
     <div class="co-name-jp">セーフティージャパン株式会社</div>
 
     <a href="tel:0995-57-7171" class="tel-link">0995-57-7171</a>
-    <div class="tel-hours">受付時間：平日 9:00〜18:00</div>
+    <div class="tel-hours">受付時間：平日 9:00〜17:00</div>
 
     <div class="or-div">または</div>
 
@@ -818,7 +862,7 @@ footer {
     </a>
 
     <div class="contact-notes">
-      <div>現場への配達エリア・日時のご相談承ります</div>
+      <div>配達は霧島市内の工事現場のみ対応しています</div>
       <div>商品のお見積りも無料で対応いたします</div>
       <div>お気軽にご連絡ください</div>
     </div>
