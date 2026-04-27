@@ -531,6 +531,141 @@ header {
   line-height: 1.8;
 }
 
+/* ===== BULK ORDER ===== */
+.bulk-order {
+  background: var(--surface);
+  border: 2px solid var(--gold);
+  margin: 0 20px 0;
+  padding: 28px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.bulk-order::before {
+  content: '班';
+  position: absolute;
+  right: -8px; bottom: -12px;
+  font-size: 7rem;
+  color: rgba(232,168,0,0.05);
+  font-weight: 900;
+  line-height: 1;
+  pointer-events: none;
+}
+.bulk-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  padding: 4px 12px;
+  margin-bottom: 14px;
+}
+.bulk-order h3 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1.45;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+.bulk-order h3 em {
+  font-style: normal;
+  color: var(--gold);
+}
+.bulk-order p {
+  font-size: 0.84rem;
+  color: var(--gray);
+  line-height: 1.85;
+  margin-bottom: 18px;
+}
+.bulk-points {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+.bulk-points li {
+  background: var(--card);
+  border-left: 3px solid var(--gold);
+  padding: 11px 14px;
+  font-size: 0.86rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  line-height: 1.5;
+  color: var(--white);
+}
+.bulk-points li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.bulk-note {
+  font-size: 0.75rem;
+  color: #666;
+  border-top: 1px solid #2A2A2A;
+  padding-top: 12px;
+  line-height: 1.8;
+}
+.bulk-note strong { color: #888; }
+
+/* ===== SHARE ===== */
+.share-section {
+  padding: 40px 20px;
+  background: var(--bg);
+  text-align: center;
+  border-bottom: 1px solid #1E1E1E;
+}
+.share-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.share-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.share-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+.share-sub {
+  font-size: 0.8rem;
+  color: var(--gray);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+.btn-line-share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #06C755;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 16px 32px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  width: 100%;
+  max-width: 320px;
+}
+.btn-line-share svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
 /* ===== DEADLINE ===== */
 .deadline {
   background: var(--red);
@@ -710,8 +845,8 @@ footer {
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    個人でも注文OK &nbsp;｜&nbsp; 現場配達OK &nbsp;｜&nbsp; 商品券使えます &nbsp;｜&nbsp; 5,000円→14,000円分 &nbsp;｜&nbsp; 安全靴 &nbsp;｜&nbsp; 作業工具 &nbsp;｜&nbsp; 保護具 &nbsp;｜&nbsp; 領収書発行 &nbsp;｜&nbsp;
-    個人でも注文OK &nbsp;｜&nbsp; 現場配達OK &nbsp;｜&nbsp; 商品券使えます &nbsp;｜&nbsp; 5,000円→14,000円分 &nbsp;｜&nbsp; 安全靴 &nbsp;｜&nbsp; 作業工具 &nbsp;｜&nbsp; 保護具 &nbsp;｜&nbsp; 領収書発行 &nbsp;｜&nbsp;
+    個人でも注文OK &nbsp;｜&nbsp; 現場まとめ注文OK &nbsp;｜&nbsp; 現場配達OK &nbsp;｜&nbsp; 商品券使えます &nbsp;｜&nbsp; 5,000円→14,000円分 &nbsp;｜&nbsp; 安全靴 &nbsp;｜&nbsp; 作業工具 &nbsp;｜&nbsp; 保護具 &nbsp;｜&nbsp; 領収書発行 &nbsp;｜&nbsp;
+    個人でも注文OK &nbsp;｜&nbsp; 現場まとめ注文OK &nbsp;｜&nbsp; 現場配達OK &nbsp;｜&nbsp; 商品券使えます &nbsp;｜&nbsp; 5,000円→14,000円分 &nbsp;｜&nbsp; 安全靴 &nbsp;｜&nbsp; 作業工具 &nbsp;｜&nbsp; 保護具 &nbsp;｜&nbsp; 領収書発行 &nbsp;｜&nbsp;
   </div>
 </div>
 
@@ -826,6 +961,37 @@ footer {
   </div>
 </section>
 
+<!-- BULK ORDER -->
+<section class="section dark">
+  <div class="sec-label">BULK ORDER</div>
+  <h2 class="sec-title">現場まとめ注文も<em>OK</em></h2>
+  <div class="bulk-order">
+    <div class="bulk-badge">班のみんなにも教えてあげてください</div>
+    <h3>現場単位での<em>まとめ注文・一括配達</em>に対応します</h3>
+    <p>「現場のみんなで安全靴を揃えたい」「班ごとにまとめて注文したい」というご要望にも対応しています。個別注文を取りまとめて一括でお届けするので、受け取りの手間もかかりません。</p>
+    <ul class="bulk-points">
+      <li>現場単位での一括配達OK</li>
+      <li>各自の商品券をそれぞれ使用できます</li>
+      <li>注文取りまとめのご相談も歓迎</li>
+      <li>LINEでのお問い合わせもOK</li>
+    </ul>
+    <div class="bulk-note">
+      <strong>※ご注意：</strong>プレミアム商品券は<strong>霧島市民の個人</strong>を対象とした制度です。法人・会社名義では商品券はご利用いただけません。各自が個人として商品券を購入・利用する形でのまとめ注文となります。
+    </div>
+  </div>
+</section>
+
+<!-- SHARE -->
+<div class="share-section">
+  <div class="share-label">SHARE</div>
+  <div class="share-title">👷 知り合いの現場仲間にも教える</div>
+  <div class="share-sub">同じ現場の仲間や知人に<br>LINEでシェアするだけで喜ばれます</div>
+  <a href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fsafetyjapan.example.jp%2F&text=%F0%9F%91%B7%E9%9C%A7%E5%B3%B6%E5%B8%82%E6%B0%91%E9%99%90%E5%AE%9A%EF%BC%81%E5%95%86%E5%93%81%E5%88%B8%E3%81%A75%2C000%E5%86%86%E3%81%A7%E5%AE%89%E5%85%A8%E9%9D%B4%E3%81%8C%E8%B2%B7%E3%81%88%E3%82%8B%E3%80%82%E6%9C%80%E5%A4%A714%2C000%E5%86%86%E5%88%86%EF%BC%81%E7%8F%BE%E5%A0%B4%E3%81%BE%E3%81%A8%E3%82%81%E6%B3%A8%E6%96%87%E3%82%82OK%E3%80%82" target="_blank" rel="noopener" class="btn-line-share">
+    <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.124 2 11.172c0 4.073 2.595 7.527 6.32 9.008.265.098.374-.115.374-.256l-.007-.459c-1.475.32-1.786-.712-1.786-.712-.24-.612-.589-.775-.589-.775-.481-.329.036-.322.036-.322.532.037.813.547.813.547.472.81 1.239.576 1.542.44.048-.342.185-.576.336-.708-1.178-.134-2.415-.589-2.415-2.621 0-.579.207-1.052.547-1.423-.055-.135-.237-.673.052-1.403 0 0 .447-.143 1.464.546A5.1 5.1 0 0 1 12 8.82c.453.002.909.061 1.334.18 1.016-.689 1.463-.546 1.463-.546.29.73.108 1.268.053 1.403.341.371.546.844.546 1.423 0 2.038-1.24 2.486-2.421 2.617.19.164.36.487.36.981l-.006 1.455c0 .143.107.357.377.256C19.405 18.696 22 15.244 22 11.172 22 6.124 17.523 2 12 2z"/></svg>
+    LINEで友だちに教える
+  </a>
+</div>
+
 <!-- DEADLINE -->
 <div class="deadline">
   <h2>⚠️ 商品券の購入期限は<br>6月12日（金）まで！</h2>
@@ -864,6 +1030,7 @@ footer {
     <div class="contact-notes">
       <div>配達は霧島市内の工事現場のみ対応しています</div>
       <div>商品のお見積りも無料で対応いたします</div>
+      <div>現場・会社単位のまとめ注文もお気軽にご相談ください</div>
       <div>お気軽にご連絡ください</div>
     </div>
   </div>
