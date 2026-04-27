@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>個人で商品券が使える｜セーフティージャパン</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --surface: #1A1A1A;
+  --card: #212121;
+  --gold: #E8A800;
+  --gold-dim: rgba(232,168,0,0.15);
+  --red: #D93B2B;
+  --white: #F4F0E8;
+  --gray: #888888;
+  --border: rgba(232,168,0,0.2);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  overflow-x: hidden;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ===== FIXED BOTTOM CTA ===== */
+.fixed-cta {
+  position: fixed;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  z-index: 200;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.fixed-btn-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--gold);
+  color: #000;
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 18px 12px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  border: none;
+}
+.fixed-btn-mail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--surface);
+  border-top: 3px solid var(--gold);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 18px 12px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: var(--bg);
+  border-bottom: 2px solid var(--gold);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+.logo small {
+  display: block;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 400;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+  margin-top: 3px;
+}
+.header-tel-link {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  background: rgba(232,168,0,0.1);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--bg);
+  padding: 40px 20px 48px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid #222;
+}
+.hero::after {
+  content: '個人';
+  position: absolute;
+  bottom: -20px; right: -10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9rem;
+  color: rgba(232,168,0,0.04);
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -0.02em;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--red);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  padding: 5px 12px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.5s ease both;
+}
+
+.hero-title {
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+.hero-title em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.hero-body {
+  font-size: 0.88rem;
+  color: rgba(244,240,232,0.65);
+  line-height: 1.85;
+  margin-bottom: 32px;
+  animation: fadeUp 0.5s 0.15s ease both;
+}
+.hero-body strong { color: var(--gold); }
+
+/* PRICE CARD */
+.price-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 24px 20px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.5s 0.2s ease both;
+  position: relative;
+}
+.price-card::before {
+  content: '霧島市プレミアム商品券';
+  position: absolute;
+  top: -10px; left: 16px;
+  background: var(--gold);
+  color: #000;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.price-item .plabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gray);
+  margin-bottom: 2px;
+}
+.price-item .pvalue {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--white);
+}
+.price-item.gold .pvalue { color: var(--gold); }
+.price-item .pvalue sup { font-size: 1.2rem; }
+.price-arrow { font-size: 1.6rem; color: var(--gold); opacity: 0.7; flex-shrink: 0; }
+.price-premium {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  margin-bottom: 14px;
+}
+.price-note {
+  font-size: 0.8rem;
+  color: var(--gray);
+  line-height: 1.75;
+}
+.price-note strong { color: var(--gold); }
+
+/* HERO CTA */
+.hero-cta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  animation: fadeUp 0.5s 0.25s ease both;
+  margin-bottom: 60px;
+}
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--gold);
+  color: #000;
+  font-weight: 900;
+  font-size: 1.05rem;
+  padding: 18px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 2px solid rgba(244,240,232,0.2);
+  color: rgba(244,240,232,0.7);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 14px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+/* ===== TICKER ===== */
+.ticker {
+  background: var(--gold);
+  color: #000;
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-track {
+  display: inline-block;
+  animation: ticker 20s linear infinite;
+  font-weight: 900;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  padding: 56px 20px;
+  border-bottom: 1px solid #1E1E1E;
+}
+.section.dark { background: var(--surface); }
+.section.black { background: #0D0D0D; }
+
+.sec-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sec-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.sec-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+.sec-title em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+/* ===== INDIVIDUAL HIGHLIGHT ===== */
+.individual-banner {
+  background: linear-gradient(135deg, #1A1A00 0%, #1A1500 100%);
+  border: 2px solid var(--gold);
+  padding: 28px 20px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.individual-banner::before {
+  content: '✓';
+  position: absolute;
+  right: 16px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 6rem;
+  color: rgba(232,168,0,0.06);
+  font-weight: 900;
+  line-height: 1;
+}
+.ind-title {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--gold);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.ind-body {
+  font-size: 0.85rem;
+  color: rgba(244,240,232,0.7);
+  line-height: 1.85;
+}
+.ind-body strong { color: var(--white); }
+
+/* CHECKLIST */
+.checklist {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.checklist li {
+  background: var(--card);
+  border-left: 3px solid var(--gold);
+  padding: 14px 16px;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+  color: var(--white);
+}
+.checklist li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 900;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+/* ===== PRODUCTS ===== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+.prod-card {
+  background: var(--card);
+  border: 1px solid #2A2A2A;
+  padding: 24px 16px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+.prod-card:active { border-color: var(--gold); }
+.prod-icon { font-size: 2.2rem; margin-bottom: 10px; }
+.prod-card h3 { font-size: 0.88rem; font-weight: 700; line-height: 1.4; }
+
+/* ===== STEPS ===== */
+.steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+.steps::before {
+  content: '';
+  position: absolute;
+  left: 22px; top: 28px; bottom: 28px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+
+.step-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 28px 0;
+  border-bottom: 1px solid #1E1E1E;
+}
+.step-item:last-child { border-bottom: none; }
+
+.step-num {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  background: var(--gold);
+  color: #000;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  letter-spacing: 0.05em;
+}
+
+.step-content { flex: 1; }
+.step-tag {
+  display: inline-block;
+  background: var(--gold-dim);
+  border: 1px solid var(--border);
+  color: var(--gold);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  margin-bottom: 8px;
+}
+.step-content h3 {
+  font-size: 1rem;
+  font-weight: 900;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.step-content p {
+  font-size: 0.83rem;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* ===== MERIT ===== */
+.merit-list { display: flex; flex-direction: column; gap: 16px; }
+.merit-item {
+  background: var(--card);
+  border-top: 3px solid var(--gold);
+  padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.merit-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  color: rgba(232,168,0,0.08);
+  position: absolute;
+  top: 8px; right: 12px;
+  line-height: 1;
+}
+.merit-icon { font-size: 1.8rem; margin-bottom: 12px; }
+.merit-item h3 {
+  font-size: 1rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.merit-item p {
+  font-size: 0.83rem;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* ===== DEADLINE ===== */
+.deadline {
+  background: var(--red);
+  padding: 48px 20px;
+  text-align: center;
+}
+.deadline h2 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.deadline > p {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+.dl-dates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 32px;
+}
+.dl-date { background: rgba(0,0,0,0.15); padding: 16px 12px; text-align: center; }
+.dl-date .dlabel { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 4px; }
+.dl-date .ddate {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+}
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  color: var(--red);
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 16px 40px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  width: 100%;
+}
+
+/* ===== CONTACT ===== */
+.contact-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 32px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.contact-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), #E8A800, var(--red));
+}
+.co-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  margin-bottom: 2px;
+}
+.co-name-jp { font-size: 0.72rem; color: var(--gray); margin-bottom: 28px; letter-spacing: 0.1em; }
+.tel-link {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.6rem;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+.tel-hours { font-size: 0.72rem; color: var(--gray); margin-bottom: 24px; }
+.or-div {
+  display: flex; align-items: center; gap: 12px;
+  color: #444; font-size: 0.72rem; letter-spacing: 0.15em; margin: 16px 0;
+}
+.or-div::before, .or-div::after { content: ''; flex: 1; height: 1px; background: #2A2A2A; }
+.email-link {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--white);
+  text-decoration: none;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid #2A2A2A;
+  padding: 14px 16px;
+  word-break: break-all;
+  line-height: 1.5;
+}
+.email-link small { display: block; font-size: 0.65rem; color: var(--gray); margin-bottom: 3px; letter-spacing: 0.1em; }
+.contact-notes {
+  margin-top: 20px;
+  font-size: 0.78rem;
+  color: #555;
+  line-height: 1.9;
+  text-align: left;
+}
+.contact-notes div { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 2px; }
+.contact-notes div::before { content: '✓'; color: var(--gold); flex-shrink: 0; font-weight: 900; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #080808;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.68rem;
+  color: #444;
+  letter-spacing: 0.08em;
+  padding-bottom: 80px; /* fixed CTAの分 */
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    SAFETY JAPAN
+    <small>セーフティージャパン株式会社</small>
+  </div>
+  <a href="tel:0995-57-7171" class="header-tel-link">📞 電話する</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🏙️ 霧島市プレミアム商品券 対応店舗</div>
+
+  <h1 class="hero-title">
+    個人でも<br>
+    商品券が<br>
+    <em>使えます。</em>
+  </h1>
+
+  <p class="hero-body">
+    自分の安全靴・工具は自分で選びたい方へ。<br>
+    会社経由は不要。<strong>個人で注文→現場に直接お届け。</strong>
+  </p>
+
+  <div class="price-card">
+    <div class="price-row">
+      <div class="price-item">
+        <div class="plabel">購入価格</div>
+        <div class="pvalue"><sup>¥</sup>5,000</div>
+      </div>
+      <div class="price-arrow">→</div>
+      <div class="price-item gold">
+        <div class="plabel">使える金額</div>
+        <div class="pvalue"><sup>¥</sup>14,000</div>
+      </div>
+    </div>
+    <div class="price-premium">🔥 プレミアム率 180%</div>
+    <div class="price-note">
+      安全靴・作業工具・保護具が<strong>お得に購入できます。</strong><br>
+      霧島市内の現場へ直接お届け・領収書も発行します。
+    </div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="tel:0995-57-7171" class="btn-primary">📞 今すぐ電話する</a>
+    <a href="mailto:safetyjapan.mk@gmail.com" class="btn-secondary">✉️ メールで問い合わせ</a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    個人でも注文OK &nbsp;｜&nbsp; 現場配達OK &nbsp;｜&nbsp; 商品券使えます &nbsp;｜&nbsp; 5,000円→14,000円分 &nbsp;｜&nbsp; 安全靴 &nbsp;｜&nbsp; 作業工具 &nbsp;｜&nbsp; 保護具 &nbsp;｜&nbsp; 領収書発行 &nbsp;｜&nbsp;
+    個人でも注文OK &nbsp;｜&nbsp; 現場配達OK &nbsp;｜&nbsp; 商品券使えます &nbsp;｜&nbsp; 5,000円→14,000円分 &nbsp;｜&nbsp; 安全靴 &nbsp;｜&nbsp; 作業工具 &nbsp;｜&nbsp; 保護具 &nbsp;｜&nbsp; 領収書発行 &nbsp;｜&nbsp;
+  </div>
+</div>
+
+<!-- INDIVIDUAL -->
+<section class="section dark">
+  <div class="sec-label">FOR INDIVIDUALS</div>
+  <h2 class="sec-title">個人のお客さまへ</h2>
+
+  <div class="individual-banner">
+    <div class="ind-title">商品券は個人でのみ<br>ご利用いただけます</div>
+    <div class="ind-body">
+      霧島市のプレミアム商品券は<strong>個人のお客さまを対象</strong>とした制度です。自分に合ったサイズ・スペックを相談しながら選んでいただけます。
+    </div>
+  </div>
+
+  <ul class="checklist">
+    <li>サイズや用途を相談しながら選べる</li>
+    <li>1点からでも注文OK</li>
+    <li>現場・自宅に直接配達</li>
+    <li>領収書を個人名義で発行</li>
+    <li>配達日時はご相談に応じます</li>
+  </ul>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section black">
+  <div class="sec-label">PRODUCTS</div>
+  <h2 class="sec-title">商品券で買える<br>主な商品</h2>
+  <div class="products-grid">
+    <div class="prod-card">
+      <div class="prod-icon">👟</div>
+      <h3>安全靴・作業靴</h3>
+    </div>
+    <div class="prod-card">
+      <div class="prod-icon">🔨</div>
+      <h3>作業工具全般</h3>
+    </div>
+    <div class="prod-card">
+      <div class="prod-icon">⛑️</div>
+      <h3>ヘルメット・保護具</h3>
+    </div>
+    <div class="prod-card">
+      <div class="prod-icon">🧤</div>
+      <h3>作業手袋・安全帯</h3>
+    </div>
+    <div class="prod-card">
+      <div class="prod-icon">👔</div>
+      <h3>作業着・安全ベスト</h3>
+    </div>
+    <div class="prod-card">
+      <div class="prod-icon">💡</div>
+      <h3>その他ご相談ください</h3>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO -->
+<section class="section">
+  <div class="sec-label">HOW TO USE</div>
+  <h2 class="sec-title">かんたん<em>3ステップ</em></h2>
+  <div class="steps">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-tag">4月〜順次発送済み</div>
+        <h3>購入引換券を受け取る</h3>
+        <p>霧島市から自宅に「購入引換券」が届きます。届いていない方は市役所へ（TEL: 0995-55-1603）。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-tag">販売期間：5/11〜6/12</div>
+        <h3>5,000円で商品券を購入</h3>
+        <p>引換券・本人確認書類・現金5,000円を持って販売場所へ。代理購入もOK。1人1冊・14,000円分。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-tag">利用期間：5/18〜10/18</div>
+        <h3>セーフティージャパンに連絡</h3>
+        <p>欲しい商品と配達場所をお知らせください。現場へ直接お届け・領収書も発行します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MERIT -->
+<section class="section dark">
+  <div class="sec-label">WHY CHOOSE US</div>
+  <h2 class="sec-title">選ばれる<em>3つの理由</em></h2>
+  <div class="merit-list">
+    <div class="merit-item">
+      <div class="merit-num">01</div>
+      <div class="merit-icon">👟</div>
+      <h3>安全靴・工具が商品券で買える</h3>
+      <p>現場で必要な安全靴、作業工具、保護具など多数取り揃え。5,000円の負担で14,000円分の装備が揃います。</p>
+    </div>
+    <div class="merit-item">
+      <div class="merit-num">02</div>
+      <div class="merit-icon">🚚</div>
+      <h3>霧島市内の現場へ直接配達</h3>
+      <p>わざわざ店舗に出向く必要なし。ご指定の現場や作業所・自宅へ直接お届けします。</p>
+    </div>
+    <div class="merit-item">
+      <div class="merit-num">03</div>
+      <div class="merit-icon">🧾</div>
+      <h3>個人名義で領収書を発行</h3>
+      <p>個人のお客さまにも適切な領収書を発行します。記録管理や確定申告にもご利用いただけます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEADLINE -->
+<div class="deadline">
+  <h2>⚠️ 商品券の購入期限は<br>6月12日（金）まで！</h2>
+  <p>引換券が届いたら、お早めに<br>商品券を購入してください。</p>
+  <div class="dl-dates">
+    <div class="dl-date">
+      <div class="dlabel">商品券 販売期間</div>
+      <div class="ddate">5/11〜6/12</div>
+    </div>
+    <div class="dl-date">
+      <div class="dlabel">商品券 利用期間</div>
+      <div class="ddate">5/18〜10/18</div>
+    </div>
+  </div>
+  <a href="tel:0995-57-7171" class="btn-white">📞 まずは電話でご相談</a>
+</div>
+
+<!-- CONTACT -->
+<section class="section black">
+  <div class="sec-label">CONTACT</div>
+  <h2 class="sec-title">お問い合わせ</h2>
+  <div class="contact-box">
+    <div class="co-name">SAFETY JAPAN</div>
+    <div class="co-name-jp">セーフティージャパン株式会社</div>
+
+    <a href="tel:0995-57-7171" class="tel-link">0995-57-7171</a>
+    <div class="tel-hours">受付時間：平日 9:00〜18:00</div>
+
+    <div class="or-div">または</div>
+
+    <a href="mailto:safetyjapan.mk@gmail.com" class="email-link">
+      <small>メールアドレス</small>
+      safetyjapan.mk@gmail.com
+    </a>
+
+    <div class="contact-notes">
+      <div>現場への配達エリア・日時のご相談承ります</div>
+      <div>商品のお見積りも無料で対応いたします</div>
+      <div>お気軽にご連絡ください</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 セーフティージャパン株式会社</p>
+  <p style="margin-top:4px">霧島市プレミアム商品券 取扱店</p>
+</footer>
+
+<!-- FIXED BOTTOM CTA -->
+<div class="fixed-cta">
+  <a href="tel:0995-57-7171" class="fixed-btn-call">📞 電話で注文</a>
+  <a href="mailto:safetyjapan.mk@gmail.com" class="fixed-btn-mail">✉️ メール相談</a>
+</div>
+
+</body>
+</html>
